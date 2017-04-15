@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{10A42680-4447-4E99-8715-06D6A59B0EAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaySystem.Models", "PaySystem.Models\PaySystem.Models.csproj", "{13B6B907-EF17-418A-90E5-B10192C54F81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaySystem.Data", "PaySystem.Data\PaySystem.Data.csproj", "{0322B316-4643-4EB2-AFDB-B55F3A01C8BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebClient", "WebClient", "{33A90468-675A-4F58-8FBC-4EAF142A2B57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Survices", "Survices", "{621D2FC7-FE07-4B6D-8CD2-5C1144DCCF87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaySystem.Services", "PaySystem.Services\PaySystem.Services.csproj", "{E31BF53A-AD92-4156-A1C9-6151E5F1F961}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaySystem.Client", "PaySystem.Client\PaySystem.Client.csproj", "{5AFFC966-863D-4BF5-AB80-E016AB8E4CB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13B6B907-EF17-418A-90E5-B10192C54F81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13B6B907-EF17-418A-90E5-B10192C54F81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13B6B907-EF17-418A-90E5-B10192C54F81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13B6B907-EF17-418A-90E5-B10192C54F81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0322B316-4643-4EB2-AFDB-B55F3A01C8BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0322B316-4643-4EB2-AFDB-B55F3A01C8BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0322B316-4643-4EB2-AFDB-B55F3A01C8BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0322B316-4643-4EB2-AFDB-B55F3A01C8BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E31BF53A-AD92-4156-A1C9-6151E5F1F961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E31BF53A-AD92-4156-A1C9-6151E5F1F961}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E31BF53A-AD92-4156-A1C9-6151E5F1F961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E31BF53A-AD92-4156-A1C9-6151E5F1F961}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AFFC966-863D-4BF5-AB80-E016AB8E4CB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AFFC966-863D-4BF5-AB80-E016AB8E4CB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AFFC966-863D-4BF5-AB80-E016AB8E4CB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AFFC966-863D-4BF5-AB80-E016AB8E4CB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{13B6B907-EF17-418A-90E5-B10192C54F81} = {10A42680-4447-4E99-8715-06D6A59B0EAA}
+		{0322B316-4643-4EB2-AFDB-B55F3A01C8BC} = {10A42680-4447-4E99-8715-06D6A59B0EAA}
+		{E31BF53A-AD92-4156-A1C9-6151E5F1F961} = {621D2FC7-FE07-4B6D-8CD2-5C1144DCCF87}
+		{5AFFC966-863D-4BF5-AB80-E016AB8E4CB6} = {33A90468-675A-4F58-8FBC-4EAF142A2B57}
+	EndGlobalSection
+EndGlobal
