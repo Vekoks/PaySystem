@@ -9,6 +9,6 @@ namespace PaySystem.Services.Content
 {
     public interface IStatusBillService
     {
-        void SetStatusBill(Bill bill, string resoult);
+        void SetStatusBill(Bill bill, string action ,string actionResoult);
     }
 }

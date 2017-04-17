@@ -11,8 +11,11 @@ namespace PaySystem.Services.Content
     {
         void CreateBillOnUser(User user, Bill bill);
 
-        Bill GetBillOnUser(User user);
+        Bill GetBillOnUser(User user, string iBank);
 
         void PutMoneyInYourBill(User user, string money);
+
+        void GetMoneyInYourBill(User user, string money);
+
     }
 }

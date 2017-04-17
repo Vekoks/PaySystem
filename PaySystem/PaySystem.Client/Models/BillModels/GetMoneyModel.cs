@@ -5,12 +5,11 @@ using System.Web;
 
 namespace PaySystem.Client.Models
 {
-    public class PutMoneyModel
+    public class GetMoneyModel
     {
-        public string Email { get; set; }
+        public string IBnak { get; set; }
 
         public string Money { get; set; }
 
-        public string IBank { get; set; }
     }
 }

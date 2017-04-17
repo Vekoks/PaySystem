@@ -31,9 +31,26 @@ namespace PaySystem.Services
             _userRepo.SaveChanges();
         }
 
-        public Bill GetBillOnUser(User user)
+        public Bill GetBillOnUser(User user, string iBank)
         {
-            return user.Bills.FirstOrDefault();
+            return user.Bills.Where(x => x.IBank == iBank).FirstOrDefault();
+        }
+
+        public void GetMoneyInYourBill(User user, string money)
+        {
+            var bill = user.Bills.Where(x => x.UserId == user.Id).FirstOrDefault();
+
+            if (bill == null)
+            {
+                
+            }
+
+            else
+            {
+                bill.Balance -= decimal.Parse(money);
+            }
+
+            _userRepo.SaveChanges();
         }
 
         public void PutMoneyInYourBill(User user, string money)

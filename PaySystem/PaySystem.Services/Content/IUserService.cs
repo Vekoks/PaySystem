@@ -12,5 +12,7 @@ namespace PaySystem.Services.Content
         IEnumerable<User> GetAllUsers();
 
         User GetUsersByEmail(string email);
+
+        User GetUsersByUserName(string userName);
     }
 }

@@ -18,11 +18,12 @@ namespace PaySystem.Services
             this._userRepo = userRepository;
         }
 
-        public void SetStatusBill(Bill bill , string resoult)
+        public void SetStatusBill(Bill bill, string action ,string resoult)
         {
             bill.StatusBill.Add(new StatusBill()
             {
-                Action = "put",
+                Id = Guid.NewGuid(),
+                Action = action,
                 ActionDate = DateTime.Now,
                 ActionResoult = resoult,
             });

@@ -20,6 +20,8 @@ namespace PaySystem.Models
 
         public override string Id { get; set; }
 
+        public override string UserName { get; set; }
+
         public string FIsrtName { get; set; }
 
         public string LastName { get; set; }
