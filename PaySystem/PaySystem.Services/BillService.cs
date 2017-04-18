@@ -63,31 +63,31 @@ namespace PaySystem.Services
 
         public string PutMoneyInYourBill(User user, PutMoneyInBillModel model)
         {
-            var billToSetMoney = user.Bills.Where(x => x.UserId == user.Id).Where(b => b.IBank == model.IBankOnBillToSetMoney).FirstOrDefault();
+            var billToSetMoney = this.GetBillOnUser(user, model.IBankOnBillToSetMoney);
 
             var billGetMoney = _reallyBilRepo.All().Where(x => x.IBank == model.IBankOnBillFromGetMoney).FirstOrDefault();
 
-            var moneyForTransle = decimal.Parse(model.Money);
+            var moneyForTransfer = decimal.Parse(model.Money);
 
             if (billToSetMoney == null)
             {
                 user.Bills.Add(new Bill()
                 {
                     Id = Guid.NewGuid(),
-                    Balance = moneyForTransle
+                    Balance = moneyForTransfer
                 });
 
                 return "no exist bill";
             }
-            else if (billGetMoney.Balance < moneyForTransle)
+            else if (billGetMoney.Balance < moneyForTransfer)
             {
                 return "no balance in really bill";
             }
             else
             {
-                billToSetMoney.Balance += moneyForTransle;
+                billToSetMoney.Balance += moneyForTransfer;
 
-                billGetMoney.Balance -= moneyForTransle;
+                billGetMoney.Balance -= moneyForTransfer;
 
                 _userRepo.SaveChanges();
 
