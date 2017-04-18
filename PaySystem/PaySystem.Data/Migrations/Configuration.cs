@@ -1,5 +1,6 @@
 namespace PaySystem.Data.Migrations
 {
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -10,7 +11,7 @@ namespace PaySystem.Data.Migrations
         public Configuration()
         {
             this.AutomaticMigrationsEnabled = true;
-            this.AutomaticMigrationDataLossAllowed = true;
+            this.AutomaticMigrationDataLossAllowed = false;
         }
 
         protected override void Seed(PaySystem.Data.PaySystemDbContext context)
@@ -27,6 +28,16 @@ namespace PaySystem.Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+
+            context.ReallyBills.AddOrUpdate(
+                new ReallyBill { Balance = 1000, IBank = "1234"},
+                new ReallyBill { Balance = 2000, IBank = "12345"},
+                new ReallyBill { Balance = 5000, IBank = "123456"},
+                new ReallyBill { Balance = 3000, IBank = "1234567"},
+                new ReallyBill { Balance = 500, IBank = "12345678"}
+
+                );
         }
     }
 }

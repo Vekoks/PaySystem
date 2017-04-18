@@ -13,9 +13,9 @@ namespace PaySystem.Services.Content
 
         Bill GetBillOnUser(User user, string iBank);
 
-        void PutMoneyInYourBill(User user, string money);
+        string PutMoneyInYourBill(User user, PutMoneyInBillModel model);
 
-        void GetMoneyInYourBill(User user, string money);
+        string GetMoneyInYourBill(User user, string money);
 
     }
 }

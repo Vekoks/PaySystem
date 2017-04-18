@@ -22,6 +22,8 @@ namespace PaySystem.Data
 
         public virtual IDbSet<StatusBill> StatusBills { get; set; }
 
+        public virtual IDbSet<ReallyBill> ReallyBills { get; set; }
+
         public static PaySystemDbContext Create()
         {
             return new PaySystemDbContext();

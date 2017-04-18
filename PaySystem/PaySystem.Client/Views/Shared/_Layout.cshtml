@@ -34,6 +34,21 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+
+            <div style="position: absolute; right :5%">
+                @{
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="/Bill/Create" class="btn btn-primary">Create bill</a>
+                    }
+
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="/Bill/PutMoney" class="btn btn-primary">Put money</a>
+                    }
+                }
+            </div>
+
         </footer>
     </div>
 

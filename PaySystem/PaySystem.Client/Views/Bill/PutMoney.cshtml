@@ -4,20 +4,23 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
+<h2>PutMoney</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>PutMoney</title>
-</head>
-<body>
-        @using (Html.BeginForm("PutMoney", "Bill", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-        {
-            @Html.AntiForgeryToken()
-            <h4>Put money in your account.</h4>
-            <hr />
+@using (Html.BeginForm("PutMoney", "Bill", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Put money in your account.</h4>
+    <hr />
             @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
+             <div class="form-group">
+                 @Html.LabelFor(m => m.IBankOnBillFromGetMoney, new { @class = "col-md-2 control-label" })
+                 <div class="col-md-10">
+                     @Html.TextBoxFor(m => m.IBankOnBillFromGetMoney, new { @class = "form-control" })
+                 </div>
+             </div>
+
+            <hr/>
+
             <div class="form-group">
                 @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
@@ -25,9 +28,9 @@
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.IBank, new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(m => m.IBankOnBillToSetMoney, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.IBank, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.IBankOnBillToSetMoney, new { @class = "form-control" })
                 </div>
             </div>
             <div class="form-group">
@@ -42,6 +45,4 @@
                     <input type="submit" class="btn btn-default" value="Put money" />
                 </div>
             </div>
-        }
-</body>
-</html>
+}

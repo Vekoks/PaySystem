@@ -25,22 +25,4 @@
         }
     </div>
 
-
-
-    @{
-        if (User.Identity.IsAuthenticated)
-        {
-            <a href="/Bill/Create" class="btn btn-default">Create bill</a>
-        }
-
-        if (User.Identity.IsAuthenticated)
-        {
-            <a href="/Bill/PutMoney" class="btn btn-default">Put money</a>
-        }
-
-        if (User.Identity.IsAuthenticated)
-        {
-            <a href="Bill/GetMoney" class="btn btn-default">Get money</a>
-        }
-    }
 </div>

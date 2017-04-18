@@ -59,6 +59,8 @@
   <ItemGroup>
     <Compile Include="Bill.cs" />
     <Compile Include="BillType\BillType.cs" />
+    <Compile Include="PutMoneyInBillModel.cs" />
+    <Compile Include="ReallyBill.cs" />
     <Compile Include="StatusBill.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -82,10 +82,17 @@ namespace PaySystem.Client.Controllers
         public ActionResult PutMoney(PutMoneyModel model)
         {
             var user = userService.GetUsersByEmail(model.Email);
-            var billOfUser = billService.GetBillOnUser(user, model.IBank);
+            var billOfUser = billService.GetBillOnUser(user, model.IBankOnBillToSetMoney);
 
-            billService.PutMoneyInYourBill(user, model.Money);
-            statusBillService.SetStatusBill(billOfUser, "Put" ,"succes");
+            var putMoneyToBillModel = new PutMoneyInBillModel()
+            {
+                Money = model.Money,
+                IBankOnBillFromGetMoney = model.IBankOnBillFromGetMoney,
+                IBankOnBillToSetMoney = model.IBankOnBillToSetMoney
+            };
+
+            var statusPutBill = billService.PutMoneyInYourBill(user, putMoneyToBillModel);
+            statusBillService.SetStatusBill(billOfUser, "Put money" , statusPutBill);
 
             return RedirectToAction("Index", "Home");
 
@@ -110,8 +117,9 @@ namespace PaySystem.Client.Controllers
             var user = userService.GetUsersByUserName(User.Identity.Name);
             var billOfUser = billService.GetBillOnUser(user, model.IBnak);
 
-            billService.GetMoneyInYourBill(user, model.Money);
-            statusBillService.SetStatusBill(billOfUser, "Get", "succes");
+            var statusGetMoney = billService.GetMoneyInYourBill(user, model.Money);
+
+            statusBillService.SetStatusBill(billOfUser, "Get money", statusGetMoney);
 
             return RedirectToAction("Index", "Home");
 
