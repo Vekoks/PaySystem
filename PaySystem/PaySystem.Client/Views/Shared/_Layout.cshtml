@@ -17,13 +17,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Pay System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            //<a href="/Bill/Create" class="btn btn-primary">Create bill</a>
+                            <li>@Html.ActionLink("Create bill", "Create", "Bill")</li>
+                        }
+
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            //<a href="/Bill/PutMoney" class="btn btn-primary">Put money</a>
+                            <li>@Html.ActionLink("Put money", "PutMoney", "Bill")</li>
+
+                        }
+                    }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -34,21 +46,6 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-
-            <div style="position: absolute; right :5%">
-                @{
-                    if (User.Identity.IsAuthenticated)
-                    {
-                        <a href="/Bill/Create" class="btn btn-primary">Create bill</a>
-                    }
-
-                    if (User.Identity.IsAuthenticated)
-                    {
-                        <a href="/Bill/PutMoney" class="btn btn-primary">Put money</a>
-                    }
-                }
-            </div>
-
         </footer>
     </div>
 

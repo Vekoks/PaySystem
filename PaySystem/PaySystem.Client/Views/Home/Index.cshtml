@@ -3,24 +3,41 @@
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1 style="position:relative;left:35%">Pay System</h1>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-
+    <div class="col-md-4" style="left: 35%">
         @{if (User.Identity.IsAuthenticated)
             {
-                <p>1000 lв</p>
-                <a href="/Bill/GetMoney/1000" class="btn btn-default">Pay</a>
+                <table>
 
-                <p>500 lв</p>
-                <a href="/Bill/GetMoney/500" class="btn btn-default">Pay</a>
+                    <tr class="row">
+                        <td><img src="~/Content/images/skuter.jpg" alt="Alternate Text" /></td>
+                    </tr>
+                    <tr class="row">
+                        <td><p>1000 lв</p></td>
+                        <td><a href="/Bill/GetMoney/1000" class="btn btn-default">Pay</a></td>
+                    </tr>
 
-                <p>2000 lв</p>
-                <a href="/Bill/GetMoney/2000" class="btn btn-default">Pay</a>
+
+                    <tr class="row">
+                        <td><img src="~/Content/images/bikechildren.jpg" alt="Alternate Text" /></td>
+                    </tr>
+                    <tr class="row">
+                        <td><p>250 lв</p></td>
+                        <td><a href="/Bill/GetMoney/500" class="btn btn-default">Pay</a></td>
+                    </tr>
+
+
+                    <tr class="row">
+                        <td><img src="~/Content/images/bikemountain.jpg" alt="Alternate Text" /></td>
+                    </tr>
+                    <tr class="row">
+                        <td><p>2000 lв</p></td>
+                        <td><a href="/Bill/GetMoney/2000" class="btn btn-default">Pay</a></td>
+                    </tr>
+                </table>
             }
         }
     </div>
