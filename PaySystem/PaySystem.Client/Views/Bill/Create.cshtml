@@ -1,14 +1,11 @@
 ﻿@model PaySystem.Client.Models.CreateBillModel
-@{
-    Layout = null;
-}
 
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>CreateBill</title>
+    <title>Create Bill</title>
 </head>
 <body>
         @using (Html.BeginForm("Create", "Bill", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -18,13 +15,13 @@
             <hr />
             @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
             <div class="form-group">
-                @Html.LabelFor(m => m.EmailOfUser, new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(m => m.EmailOfUser, "Email Of User", new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(m => m.EmailOfUser, new { @class = "form-control" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.BillType, new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(m => m.BillType, "Bill Type", new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(m => m.BillType, new { @class = "form-control" })
                 </div>
