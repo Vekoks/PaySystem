@@ -11,11 +11,16 @@ namespace PaySystem.Services
 {
     public class StatusBillService : IStatusBillService
     {
-        private readonly IPaySystemRepository<StatusBill> _userRepo;
+        private readonly IPaySystemRepository<StatusBill> _statusRepo;
 
         public StatusBillService(IPaySystemRepository<StatusBill> userRepository)
         {
-            this._userRepo = userRepository;
+            this._statusRepo = userRepository;
+        }
+
+        public ICollection<StatusBill> GetAllStatusOnBill(Bill bill)
+        {
+            return bill.StatusBill;
         }
 
         public void SetStatusBill(Bill bill, string action ,string resoult)
@@ -28,7 +33,7 @@ namespace PaySystem.Services
                 ActionResoult = resoult,
             });
 
-            _userRepo.SaveChanges();
+            _statusRepo.SaveChanges();
 
         }
     }

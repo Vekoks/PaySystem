@@ -10,5 +10,7 @@ namespace PaySystem.Services.Content
     public interface IStatusBillService
     {
         void SetStatusBill(Bill bill, string action ,string actionResoult);
+
+        ICollection<StatusBill> GetAllStatusOnBill(Bill bill);
     }
 }

@@ -11,12 +11,12 @@ namespace PaySystem.Services
 {
     public class BillService : IBillService
     {
-        private readonly IPaySystemRepository<Bill> _userRepo;
+        private readonly IPaySystemRepository<Bill> _billRepo;
         private readonly IPaySystemRepository<ReallyBill> _reallyBilRepo;
 
         public BillService(IPaySystemRepository<Bill> userRepository, IPaySystemRepository<ReallyBill> reallyBilRepo)
         {
-            this._userRepo = userRepository;
+            this._billRepo = userRepository;
             this._reallyBilRepo = reallyBilRepo;
         }
 
@@ -30,7 +30,7 @@ namespace PaySystem.Services
                 IBank = bill.IBank,
             });
 
-            _userRepo.SaveChanges();
+            _billRepo.SaveChanges();
         }
 
         public Bill GetBillOnUser(User user, string iBank)
@@ -53,7 +53,7 @@ namespace PaySystem.Services
 
                 bill.Balance -= decimal.Parse(money);
 
-                _userRepo.SaveChanges();
+                _billRepo.SaveChanges();
 
                 return "succes";
             }
@@ -89,11 +89,21 @@ namespace PaySystem.Services
 
                 billGetMoney.Balance -= moneyForTransfer;
 
-                _userRepo.SaveChanges();
+                _billRepo.SaveChanges();
 
                 return "succes";
             }
 
+        }
+
+        public ICollection<Bill> GetAllBillsOnUser(User user)
+        {
+            return user.Bills;
+        }
+
+        public Bill GetBillWithId(string billId)
+        {
+            return _billRepo.All().Where(x => x.Id.ToString().Contains(billId)).FirstOrDefault();
         }
     }
 }

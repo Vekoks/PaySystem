@@ -14,10 +14,10 @@ namespace PaySystem.Client
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-               name: "GetMoney",
-               url: "{controller}/{action}/{leva}",
-               defaults: new { controller = "Bill", action = "GetMoney" }
-           );
+            name: "GetMoney",
+            url: "{controller}/{action}/{leva}",
+            defaults: new { controller = "Bill", action = "GetMoney", leva = "" }
+            );
 
             routes.MapRoute(
                 name: "Default",

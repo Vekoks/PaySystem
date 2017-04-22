@@ -24,15 +24,11 @@
                     @{
                         if (User.Identity.IsAuthenticated)
                         {
-                            //<a href="/Bill/Create" class="btn btn-primary">Create bill</a>
+                            <li>@Html.ActionLink("Bills", "Index", "Bill")</li>
+
                             <li>@Html.ActionLink("Create bill", "Create", "Bill")</li>
-                        }
 
-                        if (User.Identity.IsAuthenticated)
-                        {
-                            //<a href="/Bill/PutMoney" class="btn btn-primary">Put money</a>
                             <li>@Html.ActionLink("Put money", "PutMoney", "Bill")</li>
-
                         }
                     }
 

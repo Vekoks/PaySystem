@@ -1,0 +1,66 @@
+﻿@model List<PaySystem.Client.Models.BillModels.AllBillsOnUser>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div class="row">
+        <h2 class="text-center">Bills on @this.User.Identity.Name</h2>
+        <div class="well col-md-6 col-md-offset-3">
+
+            @foreach (var bill in Model)
+            {
+                using (Html.BeginForm("DetailsBill", "Bill", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    <br />
+                    <div class="row form-group">
+                        <div class="col-md-6 text-right">
+                            @Html.Label("IBank: ")
+                        </div>
+                        <div class="col-md-6">
+                            @Html.Label(bill.IBank)
+                            <input class="hide" type="text" name="IBank" value="@bill.IBank" />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6 text-right">
+                            @Html.Label("Bill Type: ")
+                        </div>
+                        <div class="col-md-6">
+                            @Html.Label(bill.BillType.ToString())
+                            <input class="hide" type="text" name="BillType" value="@bill.BillType" />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6 text-right">
+                            @Html.Label("Balance: ")
+                        </div>
+                        <div class="col-md-6">
+                            <label>@bill.Balance</label>
+                            <input class="hide" type="text" name="Balance" value="@bill.Balance" />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6 text-right">
+                            @Html.Label("See details: ")
+                            <input class="hide" type="text" name="BillId" value="@bill.BillId" />
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" class="btn btn-default" value="Details" />
+                            @*@Html.ActionLink("Details", "Details/" + bill.BillId.ToString(), "Bill")*@
+                        </div>
+                    </div>
+
+                    <hr />
+                }
+            }
+
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 ﻿@model PaySystem.Client.Models.GetMoneyModel
 
-<h2>Get Money</h2>
+<h2>Pay Money</h2>
 
 @using (Html.BeginForm("GetMoney", "Bill", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -11,7 +11,8 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Money, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Money, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Money, new { @class = "form-control hide" })
+                @Html.LabelFor(m => m.Money, Model.Money.ToString()+ " lv", new { @class = "col-md-2 control-label" })
             </div>
         </div>
         <div class="form-group">
@@ -22,7 +23,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="Pay" />
+                <input type="submit" class="btn btn-default" value="Buy" />
             </div>
         </div>
 }

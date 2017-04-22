@@ -193,11 +193,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BillModels\AllBillsOnUser.cs" />
     <Compile Include="Models\BillModels\CreateBillModel.cs" />
     <Compile Include="Models\BillModels\GetMoneyModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\BillModels\PutMoneyModel.cs" />
+    <Compile Include="Models\StatusBillModels\StatusBillModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -260,6 +262,8 @@
     <Content Include="Views\Bill\PutMoney.cshtml" />
     <Content Include="Views\Bill\Create.cshtml" />
     <Content Include="Views\Bill\GetMoney.cshtml" />
+    <Content Include="Views\Bill\Index.cshtml" />
+    <Content Include="Views\Bill\DetailsBill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

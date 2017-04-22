@@ -1,4 +1,6 @@
 ﻿using PaySystem.Client.Models;
+using PaySystem.Client.Models.BillModels;
+using PaySystem.Client.Models.StatusBillModels;
 using PaySystem.Models;
 using PaySystem.Services.Content;
 using System;
@@ -25,13 +27,50 @@ namespace PaySystem.Client.Controllers
         // GET: Bill
         public ActionResult Index()
         {
-            return View();
+            var user = userService.GetUsersByUserName(this.User.Identity.Name);
+
+            var bills = billService.GetAllBillsOnUser(user);
+
+            var listOfModelBills = new List<AllBillsOnUser>();
+
+            foreach (var bill in bills)
+            {
+                listOfModelBills.Add(
+                    new AllBillsOnUser()
+                    {
+                        Balance = bill.Balance.ToString(),
+                        BillType = bill.BillType,
+                        IBank = bill.IBank,
+                        BillId = bill.Id.ToString()
+                    }
+                );
+            }
+
+            return View(listOfModelBills);
         }
 
-        // GET: Bill/Details/5
-        public ActionResult Details(int id)
+        [HttpPost]
+        public ActionResult DetailsBill(AllBillsOnUser model)
         {
-            return View();
+            var bill = billService.GetBillWithId(model.BillId);
+
+            var allStatusOnBill = statusBillService.GetAllStatusOnBill(bill);
+
+            var listWithStatus = new List<StatusBillModel>();
+
+            foreach (var status in allStatusOnBill)
+            {
+                listWithStatus.Add(
+                new StatusBillModel()
+                {
+                    Action = status.Action,
+                    ActionDate = status.ActionDate,
+                    ActionResoult = status.ActionResoult
+                }
+                );
+            }
+
+            return View(listWithStatus);
         }
 
         // GET: Bill/Create
@@ -59,7 +98,7 @@ namespace PaySystem.Client.Controllers
                 billService.CreateBillOnUser(user, newBill);
 
                 var billOfUser = billService.GetBillOnUser(user, newBill.IBank);
-                
+
                 statusBillService.SetStatusBill(billOfUser, "Create", "succes");
 
                 //return View(model);
@@ -92,7 +131,7 @@ namespace PaySystem.Client.Controllers
             };
 
             var statusPutBill = billService.PutMoneyInYourBill(user, putMoneyToBillModel);
-            statusBillService.SetStatusBill(billOfUser, "Put money" , statusPutBill);
+            statusBillService.SetStatusBill(billOfUser, "Put money", statusPutBill);
 
             return RedirectToAction("Index", "Home");
 
@@ -102,6 +141,11 @@ namespace PaySystem.Client.Controllers
         [HttpGet]
         public ActionResult GetMoney(string leva)
         {
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             var model = new GetMoneyModel()
             {
                 IBnak = "",
