@@ -11,5 +11,6 @@ namespace PaySystem.Client.Models
 
         public string Money { get; set; }
 
+        public string PicturePath { get; set; }
     }
 }

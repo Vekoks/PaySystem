@@ -49,10 +49,10 @@ namespace PaySystem.Client.Controllers
             return View(listOfModelBills);
         }
 
-        [HttpPost]
-        public ActionResult DetailsBill(AllBillsOnUser model)
+        
+        public ActionResult DetailsBill(string billId)
         {
-            var bill = billService.GetBillWithId(model.BillId);
+            var bill = billService.GetBillWithId(billId);
 
             var allStatusOnBill = statusBillService.GetAllStatusOnBill(bill);
 
@@ -139,17 +139,20 @@ namespace PaySystem.Client.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetMoney(string leva)
+        public ActionResult GetMoney(string pictureName, string leva)
         {
             if (!this.User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Login", "Account");
             }
 
+            var pathOfPicture = "~/Content/images/" + pictureName + ".jpg";
+
             var model = new GetMoneyModel()
             {
                 IBnak = "",
-                Money = leva
+                Money = leva,
+                PicturePath = pathOfPicture
             };
 
             return View(model);
