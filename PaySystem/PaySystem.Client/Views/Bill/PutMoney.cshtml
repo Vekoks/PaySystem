@@ -1,11 +1,18 @@
 ﻿@model PaySystem.Client.Models.PutMoneyModel
 
 <h2>Put Money</h2>
+<h4>Put money in your account.</h4>
+
+@{
+    if (Model.ExistBills)
+    {
+        <h4 class="text-danger">Invalide IBank on оne of the Bills</h4>
+    }
+}
 
 @using (Html.BeginForm("PutMoney", "Bill", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Put money in your account.</h4>
     <hr />
             @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
              <div class="form-group">

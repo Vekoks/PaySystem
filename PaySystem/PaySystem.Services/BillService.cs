@@ -38,51 +38,43 @@ namespace PaySystem.Services
             return user.Bills.Where(x => x.IBank == iBank).FirstOrDefault();
         }
 
-        public string GetMoneyInYourBill(User user, string money)
+        public string GetMoneyInYourBill(Bill bill, string money)
         {
-            var bill = user.Bills.Where(x => x.UserId == user.Id).FirstOrDefault();
+            var moneyForPay = decimal.Parse(money);
 
-            if (bill != null)
+            if (bill.Balance < moneyForPay)
             {
-                var moneyForPay = decimal.Parse(money);
-
-                if (bill.Balance < moneyForPay)
-                {
-                    return "no balance";
-                }
-
-                bill.Balance -= decimal.Parse(money);
-
-                _billRepo.SaveChanges();
-
-                return "succes";
+                return "no balance";
             }
 
-            return "";
+            bill.Balance -= decimal.Parse(money);
+
+            _billRepo.SaveChanges();
+
+            return "succes";
         }
 
-        public string PutMoneyInYourBill(User user, PutMoneyInBillModel model)
+        public string PutMoneyInYourBill(Bill billToSetMoney, PutMoneyInBillModel model)
         {
-            var billToSetMoney = this.GetBillOnUser(user, model.IBankOnBillToSetMoney);
-
             var billGetMoney = _reallyBilRepo.All().Where(x => x.IBank == model.IBankOnBillFromGetMoney).FirstOrDefault();
 
             var moneyForTransfer = decimal.Parse(model.Money);
 
             if (billToSetMoney == null)
             {
-                user.Bills.Add(new Bill()
-                {
-                    Id = Guid.NewGuid(),
-                    Balance = moneyForTransfer
-                });
-
                 return "no exist bill";
             }
+
+            else if (billGetMoney == null)
+            {
+                return "no exist really bill";
+            }
+
             else if (billGetMoney.Balance < moneyForTransfer)
             {
                 return "no balance in really bill";
             }
+
             else
             {
                 billToSetMoney.Balance += moneyForTransfer;

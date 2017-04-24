@@ -49,7 +49,8 @@ namespace PaySystem.Client.Controllers
             return View(listOfModelBills);
         }
 
-        
+        // GET: Bill/DetailsBill/billId
+        [HttpGet]
         public ActionResult DetailsBill(string billId)
         {
             var bill = billService.GetBillWithId(billId);
@@ -101,8 +102,6 @@ namespace PaySystem.Client.Controllers
 
                 statusBillService.SetStatusBill(billOfUser, "Create", "succes");
 
-                //return View(model);
-
                 return RedirectToAction("Index", "Home");
             }
             catch
@@ -111,12 +110,23 @@ namespace PaySystem.Client.Controllers
             }
         }
 
+        // GET: Bill/PutMoney
         [HttpGet]
         public ActionResult PutMoney()
         {
-            return View();
+            var model = new PutMoneyModel()
+            {
+                Email = "",
+                ExistBills = false,
+                IBankOnBillFromGetMoney = "",
+                IBankOnBillToSetMoney = "",
+                Money = "",
+            };
+
+            return View(model);
         }
 
+        // POST: Bill/PutMoney
         [HttpPost]
         public ActionResult PutMoney(PutMoneyModel model)
         {
@@ -126,18 +136,28 @@ namespace PaySystem.Client.Controllers
             var putMoneyToBillModel = new PutMoneyInBillModel()
             {
                 Money = model.Money,
-                IBankOnBillFromGetMoney = model.IBankOnBillFromGetMoney,
-                IBankOnBillToSetMoney = model.IBankOnBillToSetMoney
+                IBankOnBillFromGetMoney = model.IBankOnBillFromGetMoney
             };
 
-            var statusPutBill = billService.PutMoneyInYourBill(user, putMoneyToBillModel);
-            statusBillService.SetStatusBill(billOfUser, "Put money", statusPutBill);
+            var statusPutBill = billService.PutMoneyInYourBill(billOfUser, putMoneyToBillModel);
 
-            return RedirectToAction("Index", "Home");
+            switch (statusPutBill)
+            {
+                case "no exist bill":
+                    model.ExistBills = true;
+                    return View(model);
 
-            //return View(model);
+                case "no exist really bill":
+                    model.ExistBills = true;
+                    return View(model);
+
+                default:
+                    statusBillService.SetStatusBill(billOfUser, "Put money", statusPutBill);
+                    return RedirectToAction("Index", "Home");
+            }         
         }
 
+        // GET: Bill/GetMoney
         [HttpGet]
         public ActionResult GetMoney(string pictureName, string leva)
         {
@@ -150,50 +170,33 @@ namespace PaySystem.Client.Controllers
 
             var model = new GetMoneyModel()
             {
-                IBnak = "",
+                IBank = "",
                 Money = leva,
-                PicturePath = pathOfPicture
+                PicturePath = pathOfPicture,
+                IsValetIBank = false
             };
 
             return View(model);
         }
 
+        // POST: Bill/GetMoney
         [HttpPost]
         public ActionResult GetMoney(GetMoneyModel model)
         {
             var user = userService.GetUsersByUserName(User.Identity.Name);
-            var billOfUser = billService.GetBillOnUser(user, model.IBnak);
+            var billOfUser = billService.GetBillOnUser(user, model.IBank);
 
-            var statusGetMoney = billService.GetMoneyInYourBill(user, model.Money);
+            if (billOfUser == null)
+            {
+                model.IsValetIBank = true;
+                return View(model);
+            }
+
+            var statusGetMoney = billService.GetMoneyInYourBill(billOfUser, model.Money);
 
             statusBillService.SetStatusBill(billOfUser, "Get money", statusGetMoney);
 
             return RedirectToAction("Index", "Home");
-
-            //return View(model);
-        }
-
-
-        // GET: Bill/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Bill/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         // GET: Bill/Delete/5

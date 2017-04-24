@@ -17,9 +17,9 @@ namespace PaySystem.Services.Content
 
         Bill GetBillWithId(string billId);
 
-        string PutMoneyInYourBill(User user, PutMoneyInBillModel model);
+        string PutMoneyInYourBill(Bill bill, PutMoneyInBillModel model);
 
-        string GetMoneyInYourBill(User user, string money);
+        string GetMoneyInYourBill(Bill bill, string money);
 
     }
 }

@@ -14,5 +14,7 @@ namespace PaySystem.Client.Models
         public string IBankOnBillToSetMoney { get; set; }
 
         public string IBankOnBillFromGetMoney { get; set; }
+
+        public bool ExistBills { get; set; }
     }
 }

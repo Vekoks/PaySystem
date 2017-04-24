@@ -7,6 +7,13 @@
 
 <img src="@Url.Content(Model.PicturePath)" alt="Alternate Text" />
 
+@{
+    if (Model.IsValetIBank)
+    {
+        <h4 class="text-danger">No exist Bill</h4>
+    }
+}
+
 @using (Html.BeginForm("GetMoney", "Bill", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
@@ -15,17 +22,22 @@
         @Html.ValidationSummary("", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(m => m.Money, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Money, new { @class = "form-control hide" })
+            <div class="col-md-10">             
                 @Html.LabelFor(m => m.Money, Model.Money.ToString()+ " lv", new { @class = "col-md-2 control-label" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.IBnak, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.IBank, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.IBnak, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.IBank, new { @class = "form-control" })
             </div>
         </div>
+
+        <div id="HideElements">
+            @Html.TextBoxFor(m => m.Money, new { @class = "form-control hide" })
+            @Html.TextBoxFor(m => m.PicturePath, new { @class = "form-control hide" })
+        </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" class="btn btn-default" value="Buy" />
