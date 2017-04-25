@@ -12,5 +12,7 @@ namespace PaySystem.Services.Content
         void SetStatusBill(Bill bill, string action ,string actionResoult);
 
         ICollection<StatusBill> GetAllStatusOnBill(Bill bill);
+
+        void DeleteStatusOnBill(Bill bill);
     }
 }

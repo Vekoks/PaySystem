@@ -14,23 +14,23 @@
 
             @foreach (var bill in Model)
             {
-                    <br />
-                    <div class="row form-group">
-                        <div class="col-md-6 text-right">
-                            @Html.Label("IBank: ")
-                        </div>
-                        <div class="col-md-6">
-                            @Html.Label(bill.IBank)
-                        </div>
+                <br />
+                <div class="row form-group">
+                    <div class="col-md-6 text-right">
+                        @Html.Label("IBank: ")
                     </div>
-                    <div class="row form-group">
-                        <div class="col-md-6 text-right">
-                            @Html.Label("Bill Type: ")
-                        </div>
-                        <div class="col-md-6">
-                            @Html.Label(bill.BillType.ToString())
-                        </div>
+                    <div class="col-md-6">
+                        @Html.Label(bill.IBank)
                     </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6 text-right">
+                        @Html.Label("Bill Type: ")
+                    </div>
+                    <div class="col-md-6">
+                        @Html.Label(bill.BillType.ToString())
+                    </div>
+                </div>
                     <div class="row form-group">
                         <div class="col-md-6 text-right">
                             @Html.Label("Balance: ")
@@ -48,7 +48,17 @@
                         </div>
                     </div>
 
-                    <hr />
+                if (decimal.Parse(bill.Balance) == 0)
+                {
+                    <div class="row form-group">
+
+                        <div class="text-center">
+                            @Html.ActionLink("Delete bill", "Delete/" + @bill.BillId, "Bill", new { @class = "btn btn-danger" })
+                        </div>
+                    </div>
+                }
+
+                <hr />
             }
         </div>
     </div>

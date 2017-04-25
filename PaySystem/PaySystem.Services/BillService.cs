@@ -97,5 +97,11 @@ namespace PaySystem.Services
         {
             return _billRepo.All().Where(x => x.Id.ToString().Contains(billId)).FirstOrDefault();
         }
+
+        public void DeleteBill(Bill bill)
+        {
+            _billRepo.Delete(bill);
+            _billRepo.SaveChanges();
+        }
     }
 }

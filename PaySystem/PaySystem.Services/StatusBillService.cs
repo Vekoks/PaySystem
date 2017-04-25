@@ -18,6 +18,18 @@ namespace PaySystem.Services
             this._statusRepo = userRepository;
         }
 
+        public void DeleteStatusOnBill(Bill bill)
+        {
+            var statusBill = bill.StatusBill.ToList();
+
+            foreach (var status in statusBill)
+            {
+                _statusRepo.Delete(status);
+            }
+
+            _statusRepo.SaveChanges();
+        }
+
         public ICollection<StatusBill> GetAllStatusOnBill(Bill bill)
         {
             return bill.StatusBill;
@@ -36,5 +48,7 @@ namespace PaySystem.Services
             _statusRepo.SaveChanges();
 
         }
+
+
     }
 }

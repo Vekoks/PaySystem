@@ -199,10 +199,18 @@ namespace PaySystem.Client.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // GET: Bill/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Bill/Delete/billId
+        public ActionResult Delete(string billId)
         {
-            return View();
+            var user = userService.GetUsersByUserName(User.Identity.Name);
+            var billOfUser = billService.GetBillWithId(billId);
+
+            statusBillService.DeleteStatusOnBill(billOfUser);
+            billService.DeleteBill(billOfUser);
+
+            return RedirectToAction("Index", "Home");
+
+            //return View();
         }
 
         // POST: Bill/Delete/5

@@ -21,5 +21,6 @@ namespace PaySystem.Services.Content
 
         string GetMoneyInYourBill(Bill bill, string money);
 
+        void DeleteBill(Bill bill);
     }
 }
