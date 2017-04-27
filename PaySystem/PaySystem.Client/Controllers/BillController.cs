@@ -136,10 +136,11 @@ namespace PaySystem.Client.Controllers
             var putMoneyToBillModel = new PutMoneyInBillModel()
             {
                 Money = model.Money,
-                IBankOnBillFromGetMoney = model.IBankOnBillFromGetMoney
+                IBankOnBillFromGetMoney = model.IBankOnBillFromGetMoney,
+                billToSetMoney = billOfUser
             };
 
-            var statusPutBill = billService.PutMoneyInYourBill(billOfUser, putMoneyToBillModel);
+            var statusPutBill = billService.PutMoneyInYourBill(putMoneyToBillModel);
 
             switch (statusPutBill)
             {
@@ -155,6 +156,55 @@ namespace PaySystem.Client.Controllers
                     statusBillService.SetStatusBill(billOfUser, "Put money", statusPutBill);
                     return RedirectToAction("Index", "Home");
             }         
+        }
+
+        // GET: Bill/TransferringMoney
+        [HttpGet]
+        public ActionResult TransferringMoney()
+        {
+            var model = new PutMoneyModel()
+            {
+                Email = "",
+                ExistBills = false,
+                IBankOnBillFromGetMoney = "",
+                IBankOnBillToSetMoney = "",
+                Money = "",
+            };
+
+            return View(model);
+        }
+
+        // POST: Bill/TransferringMoney
+        [HttpPost]
+        public ActionResult TransferringMoney(PutMoneyModel model)
+        {
+            var user = userService.GetUsersByEmail(model.Email);
+            var billOfUser = billService.GetBillOnUser(user, model.IBankOnBillToSetMoney);
+
+            var putMoneyToBillModel = new PutMoneyInBillModel()
+            {
+                Money = model.Money,
+                IBankOnBillFromGetMoney = model.IBankOnBillFromGetMoney,
+                billToSetMoney = billOfUser
+            };
+
+            var statusPutBill = billService.TransferringFormBillToBill(putMoneyToBillModel, user);
+
+            switch (statusPutBill)
+            {
+                case "no exist one of bills":
+                    model.ExistBills = true;
+                    return View(model);
+
+                default:
+
+                    var billFromGetMoney = billService.GetBillOnUser(user, model.IBankOnBillFromGetMoney);
+
+                    statusBillService.SetStatusBill(billOfUser, "Transferring put money", statusPutBill);
+                    statusBillService.SetStatusBill(billFromGetMoney, "Transferring get money", statusPutBill);
+
+                    return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: Bill/GetMoney

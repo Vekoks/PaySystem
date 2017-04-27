@@ -17,10 +17,12 @@ namespace PaySystem.Services.Content
 
         Bill GetBillWithId(string billId);
 
-        string PutMoneyInYourBill(Bill bill, PutMoneyInBillModel model);
+        string PutMoneyInYourBill(PutMoneyInBillModel model);
 
         string GetMoneyInYourBill(Bill bill, string money);
 
         void DeleteBill(Bill bill);
+
+        string TransferringFormBillToBill(PutMoneyInBillModel model, User user);
     }
 }

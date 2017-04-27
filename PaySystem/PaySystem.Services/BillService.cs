@@ -54,9 +54,11 @@ namespace PaySystem.Services
             return "succes";
         }
 
-        public string PutMoneyInYourBill(Bill billToSetMoney, PutMoneyInBillModel model)
+        public string PutMoneyInYourBill(PutMoneyInBillModel model)
         {
-            var billGetMoney = _reallyBilRepo.All().Where(x => x.IBank == model.IBankOnBillFromGetMoney).FirstOrDefault();
+            var billToSetMoney = model.billToSetMoney;
+
+            var billGetMoneyFromReallyBill = _reallyBilRepo.All().Where(x => x.IBank == model.IBankOnBillFromGetMoney).FirstOrDefault();
 
             var moneyForTransfer = decimal.Parse(model.Money);
 
@@ -65,12 +67,12 @@ namespace PaySystem.Services
                 return "no exist bill";
             }
 
-            else if (billGetMoney == null)
+            else if (billGetMoneyFromReallyBill == null)
             {
                 return "no exist really bill";
             }
 
-            else if (billGetMoney.Balance < moneyForTransfer)
+            else if (billGetMoneyFromReallyBill.Balance < moneyForTransfer)
             {
                 return "no balance in really bill";
             }
@@ -79,7 +81,7 @@ namespace PaySystem.Services
             {
                 billToSetMoney.Balance += moneyForTransfer;
 
-                billGetMoney.Balance -= moneyForTransfer;
+                billGetMoneyFromReallyBill.Balance -= moneyForTransfer;
 
                 _billRepo.SaveChanges();
 
@@ -102,6 +104,36 @@ namespace PaySystem.Services
         {
             _billRepo.Delete(bill);
             _billRepo.SaveChanges();
+        }
+
+        public string TransferringFormBillToBill(PutMoneyInBillModel model, User user)
+        {
+            var billFromGetMonney = user.Bills.Where(x => x.IBank == model.IBankOnBillFromGetMoney).FirstOrDefault();
+
+            var billToSetMoney = model.billToSetMoney;
+
+            var moneyForTransfer = decimal.Parse(model.Money);
+
+            if (billToSetMoney == null || billFromGetMonney == null)
+            {
+                return "no exist one of bills";
+            }
+
+            else if (billFromGetMonney.Balance < moneyForTransfer)
+            {
+                return "no balance in bill from which I make money";
+            }
+
+            else
+            {
+                billToSetMoney.Balance += moneyForTransfer;
+
+                billFromGetMonney.Balance -= moneyForTransfer;
+
+                _billRepo.SaveChanges();
+
+                return "succes";
+            }
         }
     }
 }

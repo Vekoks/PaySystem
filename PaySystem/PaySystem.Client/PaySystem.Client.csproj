@@ -264,6 +264,7 @@
     <Content Include="Views\Bill\GetMoney.cshtml" />
     <Content Include="Views\Bill\Index.cshtml" />
     <Content Include="Views\Bill\DetailsBill.cshtml" />
+    <Content Include="Views\Bill\TransferringMoney.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,5 +11,7 @@ namespace PaySystem.Models
         public string Money { get; set; }
 
         public string IBankOnBillFromGetMoney { get; set; }
+
+        public Bill billToSetMoney { get; set; }
     }
 }

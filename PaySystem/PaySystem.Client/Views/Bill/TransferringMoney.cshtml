@@ -1,0 +1,51 @@
+﻿@model PaySystem.Client.Models.PutMoneyModel
+
+<h2>Transferring Money</h2>
+<h4>Transferring money in your account.</h4>
+
+@{
+    if (Model.ExistBills)
+    {
+        <h4 class="text-danger">Invalide IBank on оne of the Bills</h4>
+    }
+}
+
+@using (Html.BeginForm("TransferringMoney", "Bill", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
+    <div class="form-group">
+        @Html.LabelFor(m => m.IBankOnBillFromGetMoney, "IBank on bill from get Money", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.IBankOnBillFromGetMoney, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.IBankOnBillToSetMoney, "IBank on bill to set Money", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.IBankOnBillToSetMoney, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Money, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Money, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Put money" />
+                </div>
+            </div>
+}
