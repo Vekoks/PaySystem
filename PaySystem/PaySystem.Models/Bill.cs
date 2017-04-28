@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace PaySystem.Models
 
         public decimal Balance { get; set; }
 
+        [MaxLength(18)]
         public string IBank { get; set; }
 
         public string UserId { get; set; }
