@@ -13,11 +13,13 @@ namespace PaySystem.Services
     {
         private readonly IPaySystemRepository<Bill> _billRepo;
         private readonly IPaySystemRepository<ReallyBill> _reallyBilRepo;
+        private readonly IPaySystemRepository<User> _userBilRepo;
 
-        public BillService(IPaySystemRepository<Bill> userRepository, IPaySystemRepository<ReallyBill> reallyBilRepo)
+        public BillService(IPaySystemRepository<Bill> userRepository, IPaySystemRepository<ReallyBill> reallyBilRepo, IPaySystemRepository<User> userBilRepo)
         {
             this._billRepo = userRepository;
             this._reallyBilRepo = reallyBilRepo;
+            this._userBilRepo = userBilRepo;
         }
 
         public void CreateBillOnUser(User user, Bill bill)
@@ -134,6 +136,47 @@ namespace PaySystem.Services
 
                 return "succes";
             }
+        }
+
+        public string PutMoneyInYourBillFromManyBills(ModelForPutMoneyFromManyBills model)
+        {
+            var user = _userBilRepo.All().Where(x => x.Email.Contains(model.Email)).FirstOrDefault();
+
+            var billToSetMoney = user.Bills.Where(x => x.IBank.Contains(model.IBankOnBillSetMoney)).FirstOrDefault();
+
+            if (billToSetMoney == null)
+            {
+                return "no exist bill";
+            }
+
+            var billsForGetMoney = model.Bills;
+
+            foreach (var bill in billsForGetMoney)
+            {
+                var billGetMoneyFromReallyBill = _reallyBilRepo.All().Where(x => x.IBank.Contains(bill.IBankOnBillFromGetMoney)).FirstOrDefault();
+                var moneyForTransfer = decimal.Parse(bill.Money);
+
+                if (billGetMoneyFromReallyBill == null)
+                {
+                    return "no exist really bill";
+                }
+
+                else if (billGetMoneyFromReallyBill.Balance < moneyForTransfer)
+                {
+                    return "no balance in really bill";
+                }
+
+                else
+                {
+                    billToSetMoney.Balance += moneyForTransfer;
+
+                    billGetMoneyFromReallyBill.Balance -= moneyForTransfer;
+                }
+            }
+
+            _billRepo.SaveChanges();
+
+            return "succes";
         }
     }
 }

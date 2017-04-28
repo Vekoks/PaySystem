@@ -13,6 +13,9 @@
 @using (Html.BeginForm("PutMoney", "Bill", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
+
+    <a href="/Bill/PutMoneyFromManyBill" class="btn btn-info">Click if you want get money from many bills</a>
+
     <hr />
             @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
              <div class="form-group">
@@ -45,7 +48,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" class="btn btn-default" value="Put money" />
+                    <input type="submit" class="btn btn-success" value="Put money" />
                 </div>
             </div>
 }

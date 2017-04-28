@@ -58,7 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bill.cs" />
+    <Compile Include="PutMoneyFromManyBillModels\BillModelForPutMoneyFromManyBill.cs" />
     <Compile Include="BillType\BillType.cs" />
+    <Compile Include="PutMoneyFromManyBillModels\ModelForPutMoneyFromManyBills.cs" />
     <Compile Include="PutMoneyInBillModel.cs" />
     <Compile Include="ReallyBill.cs" />
     <Compile Include="StatusBill.cs" />

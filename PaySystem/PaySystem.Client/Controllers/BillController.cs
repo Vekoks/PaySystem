@@ -1,4 +1,5 @@
-﻿using PaySystem.Client.Models;
+﻿using Newtonsoft.Json;
+using PaySystem.Client.Models;
 using PaySystem.Client.Models.BillModels;
 using PaySystem.Client.Models.StatusBillModels;
 using PaySystem.Models;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace PaySystem.Client.Controllers
 {
@@ -156,6 +158,46 @@ namespace PaySystem.Client.Controllers
                     statusBillService.SetStatusBill(billOfUser, "Put money", statusPutBill);
                     return RedirectToAction("Index", "Home");
             }         
+        }
+
+        // GET: Bill/PutMoneyFromManyBill
+        [HttpGet]
+        public ActionResult PutMoneyFromManyBill()
+        {
+            var model = new ModelForPutMoneyFromManyBills()
+            {
+                ExistBills = false,
+            };
+
+            return View(model);
+        }
+
+        // POST: Bill/PutMoneyFromManyBill
+        [HttpPost]
+        public ActionResult PutMoneyFromManyBill(string model)
+        {
+            var putMoney = new JavaScriptSerializer().Deserialize<ModelForPutMoneyFromManyBills>(model);
+
+            var user = userService.GetUsersByEmail(putMoney.Email);
+            var billOfUser = billService.GetBillOnUser(user, putMoney.IBankOnBillSetMoney);
+
+            var statusPutBill = billService.PutMoneyInYourBillFromManyBills(putMoney);
+
+            switch (statusPutBill)
+            {
+                case "no exist bill":
+                    putMoney.ExistBills = true;
+                    return View(model);
+
+                case "no exist really bill":
+                    putMoney.ExistBills = true;
+                    return View(model);
+
+                default:
+                    statusBillService.SetStatusBill(billOfUser, "Put money from many bills", statusPutBill);
+                    return RedirectToAction("Index", "Home");
+                    //return Json(new { status = "Success", message = "Success" });
+            }
         }
 
         // GET: Bill/TransferringMoney
