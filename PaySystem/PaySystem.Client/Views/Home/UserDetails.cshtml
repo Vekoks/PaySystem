@@ -1,0 +1,56 @@
+﻿@model PaySystem.Client.Models.UsersModels.UserDetailsViewModel
+@{
+    ViewBag.Title = "User details.";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserDetails</title>
+</head>
+<body>
+    
+    <br />
+    <br />
+    <div class="row">
+        <h1 class="text-center">User details page!</h1>
+        <div class="well col-md-6 col-md-offset-3">
+            <br />
+            <div class="row form-group">
+                <div class="col-md-6 text-right">
+                    @Html.Label("Username: ")
+                </div>
+                <div class="col-md-6">
+                    @Html.Label(Model.UserName)
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6 text-right">
+                    @Html.Label("First name: ")
+                </div>
+                <div class="col-md-6">
+                    @Html.Label(Model.FirstName)
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6 text-right">
+                    @Html.Label("Last name: ")
+                </div>
+                <div class="col-md-6">
+                    @Html.Label(Model.LastName)
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6 text-right">
+                    @Html.Label("E-mail: ")
+                </div>
+                <div class="col-md-6">
+                    <strong>@Html.Encode(Model.Email)</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

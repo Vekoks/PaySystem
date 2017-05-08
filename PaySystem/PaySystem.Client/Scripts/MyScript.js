@@ -73,14 +73,32 @@ function SentJson() {
         traditional: true,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
+            debugger;
+
             if (data.status == "Success") {
                 alert("Succes");
-                $.get("/Home/Index");
-            } else {
+                $.ajax({
+                    url: "/Home/Index",
+                    type: "Get",
+                    success: function (data) {
+                    }
+                });
+            }
+           
+            else if (data.status == "no exist bill") {
+                alert("no exist bill");
+            }
+            else if (data.status == "no exist really bill") {
+                alert("no exist really bill");
+            }
+            else if (data.status == "no balance in really bill") {
+                alert("no balance in really bill");
+            }
+            else {
                 alert("Error occurs on the Database level!");
             }
         },
-        error: function () {
+        error: function (data ) {
             alert("An error has occured!!!");
         }
     });

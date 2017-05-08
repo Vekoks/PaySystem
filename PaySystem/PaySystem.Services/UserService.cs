@@ -25,12 +25,12 @@ namespace PaySystem.Services
 
         public User GetUsersByEmail(string email)
         {
-            return _userRepo.All().Where(x =>x.Email.Contains(email)).FirstOrDefault();
+            return _userRepo.All().Where(x =>x.Email == email).FirstOrDefault();
         }
 
         public User GetUsersByUserName(string userName)
         {
-            return _userRepo.All().Where(x => x.UserName.Contains(userName)).FirstOrDefault();
+            return _userRepo.All().Where(x => x.UserName == userName).FirstOrDefault();
         }
     }
 }

@@ -99,7 +99,7 @@ namespace PaySystem.Services
 
         public Bill GetBillWithId(string billId)
         {
-            return _billRepo.All().Where(x => x.Id.ToString().Contains(billId)).FirstOrDefault();
+            return _billRepo.All().Where(x => x.Id.ToString() == billId).FirstOrDefault();
         }
 
         public void DeleteBill(Bill bill)
@@ -140,9 +140,9 @@ namespace PaySystem.Services
 
         public string PutMoneyInYourBillFromManyBills(ModelForPutMoneyFromManyBills model)
         {
-            var user = _userBilRepo.All().Where(x => x.Email.Contains(model.Email)).FirstOrDefault();
+            var user = _userBilRepo.All().Where(x => x.Email == model.Email).FirstOrDefault();
 
-            var billToSetMoney = user.Bills.Where(x => x.IBank.Contains(model.IBankOnBillSetMoney)).FirstOrDefault();
+            var billToSetMoney = user.Bills.Where(x => x.IBank == model.IBankOnBillSetMoney).FirstOrDefault();
 
             if (billToSetMoney == null)
             {
@@ -153,7 +153,7 @@ namespace PaySystem.Services
 
             foreach (var bill in billsForGetMoney)
             {
-                var billGetMoneyFromReallyBill = _reallyBilRepo.All().Where(x => x.IBank.Contains(bill.IBankOnBillFromGetMoney)).FirstOrDefault();
+                var billGetMoneyFromReallyBill = _reallyBilRepo.All().Where(x => x.IBank == bill.IBankOnBillFromGetMoney).FirstOrDefault();
                 var moneyForTransfer = decimal.Parse(bill.Money);
 
                 if (billGetMoneyFromReallyBill == null)

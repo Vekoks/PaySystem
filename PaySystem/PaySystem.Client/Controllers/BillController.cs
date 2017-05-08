@@ -182,21 +182,28 @@ namespace PaySystem.Client.Controllers
             var billOfUser = billService.GetBillOnUser(user, putMoney.IBankOnBillSetMoney);
 
             var statusPutBill = billService.PutMoneyInYourBillFromManyBills(putMoney);
-
+            
             switch (statusPutBill)
             {
                 case "no exist bill":
-                    putMoney.ExistBills = true;
-                    return View(model);
+                    //putMoney.ExistBills = true;
+                    //return View(model);
+                    return Json(new { status = "no exist bill", message = "no exist bill" });
 
                 case "no exist really bill":
-                    putMoney.ExistBills = true;
-                    return View(model);
+                    //putMoney.ExistBills = true;
+                    //return View(model);
+                    return Json(new { status = "no exist really bill", message = "no exist really bill" });
+
+                case "no balance in really bill":
+                    //putMoney.ExistBills = true;
+                    //return View(model);
+                    return Json(new { status = "no balance in really bill", message = "no balance in really bill" });
 
                 default:
                     statusBillService.SetStatusBill(billOfUser, "Put money from many bills", statusPutBill);
-                    return RedirectToAction("Index", "Home");
-                    //return Json(new { status = "Success", message = "Success" });
+                    //return RedirectToAction("Index", "Home");
+                    return Json(new { status = "Success", message = "Success" });
             }
         }
 
