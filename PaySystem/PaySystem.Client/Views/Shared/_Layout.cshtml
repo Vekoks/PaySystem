@@ -40,7 +40,9 @@
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
+        <div id="BodyContext">
+            @RenderBody()
+        </div>
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My Pay System</p>

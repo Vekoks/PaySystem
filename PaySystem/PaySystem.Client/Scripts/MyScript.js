@@ -73,15 +73,11 @@ function SentJson() {
         traditional: true,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            debugger;
-
             if (data.status == "Success") {
                 alert("Succes");
-                $.ajax({
-                    url: "/Home/Index",
-                    type: "Get",
-                    success: function (data) {
-                    }
+                jQuery.get("/Home/Index", function (response) {
+                    console.log("here");
+                    $("#BodyContext").html(response)
                 });
             }
            
