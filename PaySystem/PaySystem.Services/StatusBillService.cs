@@ -35,20 +35,29 @@ namespace PaySystem.Services
             return bill.StatusBill;
         }
 
-        public void SetStatusBill(Bill bill, string action ,string resoult)
+        public Guid SetStatusBill(Bill bill, string action ,string resoult)
         {
-            bill.StatusBill.Add(new StatusBill()
+            var newStatus = new StatusBill()
             {
                 Id = Guid.NewGuid(),
                 Action = action,
                 ActionDate = DateTime.Now,
                 ActionResoult = resoult,
-            });
+            };
+
+            bill.StatusBill.Add(newStatus);
 
             _statusRepo.SaveChanges();
 
+            return newStatus.Id;
         }
 
+        public void UpDateStatus(StatusBill statusBill, string action, string actionResoult)
+        {
+            statusBill.Action = action;
+            statusBill.ActionResoult = actionResoult;
 
+            _statusRepo.SaveChanges();
+        }
     }
 }

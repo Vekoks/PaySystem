@@ -100,10 +100,6 @@ namespace PaySystem.Client.Controllers
 
                 billService.CreateBillOnUser(user, newBill);
 
-                var billOfUser = billService.GetBillOnUser(user, newBill.IBank);
-
-                statusBillService.SetStatusBill(billOfUser, "Create", "succes");
-
                 return RedirectToAction("Index", "Home");
             }
             catch
@@ -155,7 +151,7 @@ namespace PaySystem.Client.Controllers
                     return View(model);
 
                 default:
-                    statusBillService.SetStatusBill(billOfUser, "Put money", statusPutBill);
+                    //statusBillService.SetStatusBill(billOfUser, "Put money", statusPutBill);
                     return RedirectToAction("Index", "Home");
             }         
         }
@@ -201,7 +197,6 @@ namespace PaySystem.Client.Controllers
                     return Json(new { status = "no balance in really bill", message = "no balance in really bill" });
 
                 default:
-                    statusBillService.SetStatusBill(billOfUser, "Put money from many bills", statusPutBill);
                     //return RedirectToAction("Index", "Home");
                     return Json(new { status = "Success", message = "Success" });
             }
@@ -249,9 +244,6 @@ namespace PaySystem.Client.Controllers
 
                     var billFromGetMoney = billService.GetBillOnUser(user, model.IBankOnBillFromGetMoney);
 
-                    statusBillService.SetStatusBill(billOfUser, "Transferring put money", statusPutBill);
-                    statusBillService.SetStatusBill(billFromGetMoney, "Transferring get money", statusPutBill);
-
                     return RedirectToAction("Index", "Home");
             }
         }
@@ -291,9 +283,7 @@ namespace PaySystem.Client.Controllers
                 return View(model);
             }
 
-            var statusGetMoney = billService.GetMoneyInYourBill(billOfUser, model.Money);
-
-            statusBillService.SetStatusBill(billOfUser, "Get money", statusGetMoney);
+            billService.GetMoneyInYourBill(billOfUser, model.Money);
 
             return RedirectToAction("Index", "Home");
         }

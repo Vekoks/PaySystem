@@ -21,7 +21,7 @@ namespace PaySystem.Services.Content
 
         string PutMoneyInYourBillFromManyBills(ModelForPutMoneyFromManyBills model);
 
-        string GetMoneyInYourBill(Bill bill, string money);
+        void GetMoneyInYourBill(Bill bill, string money);
 
         void DeleteBill(Bill bill);
 
